@@ -40,7 +40,7 @@ int main() {
 	p = &st;			// 구조체 포인터변수 pt에 per1의 주소 할당
 
 	printf("%d %d %d %d\n", st.kor, st.eng, st.mat, st.sum);
-	printf("%d %d %d %d\n", st.kor, st.eng, st.mat, st.kor + st.eng + st.mat)								//sum == 0
+	printf("%d %d %d %d\n", st.kor, st.eng, st.mat, st.kor + st.eng + st.mat);								//sum == 0
 	printf("%d %d %d %d\n", p->kor, p->eng, p->mat, p->kor + p->eng + p->mat);					//sum == 0
 	printf("%d %d %d %d\n", (*p).kor, (*p).eng, (*p).mat, (*p).kor + (*p).eng + (*p).mat);		//sum == 0
 	printf("%d %d %d %d\n", st.kor, st.eng, st.mat, st.sum);

@@ -24,3 +24,41 @@
 //			int** score2;
 //			score2 = (int**)malloc(sizeof(int*) * n);
 //			free(score2);				<- score2가 가리키는 메모리 해제
+
+//N개 데이터 평균 분산 구하기
+#include <stdio.h>
+#include <stdlib.h> //malloc(), free()
+int main() {
+    int i, n;
+    int* score; //동적 할당 받을 포인터 변수
+    float sum, average, variance;
+
+    printf("몇 명의 성적을 입력 하나요? ");
+    scanf_s("%d", &n);
+
+    // int(4byte)*n의 메모리 할당        <- int score[n]; 같은 의미 ( 증감연산자 사용X )
+    score = (int*)malloc(sizeof(int) * n);      //  메모리 시작주소 반환(void *) - (void * -> int *) 형 변환
+    
+    for (i = 0; i < n; i++) {
+        printf("학생 %2d : ", i + 1);
+        scanf_s("%d", &score[i]); //score +i 같은 표현
+    }
+
+    for (sum = 0.0, i = 0; i < n; i++) {
+        sum += score[i];
+    }
+
+    average = sum / n;
+
+    for (sum = 0.0, i = 0; i < n; i++) {
+        sum += (score[i] - average) * (score[i] - average);
+    }
+
+    variance = sum / n;
+
+    printf("평균과 분산은 %f, %f 이다\n", average, variance);
+
+    free(score);    // 동적 할당 받은 메모리 해제
+
+    return 0;
+}

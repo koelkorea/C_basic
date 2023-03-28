@@ -1,6 +1,4 @@
-// 구조체 (struct, typedef, union, enum)
-//      : 두 개 이상의 변수(자료형)를 묶음으로 새로운 자료형으로 재정의
-//          -> 일종의 멤버변수만 존재하는 객체와 유사 (원시형 객체라고 생각해두자)
+// struct, typedef, union, enum
 
 // typedef    A    B
 //		: A 자료 타입의 또 다른 이름을 B로 정의한다
@@ -14,9 +12,9 @@
 //			int rank;
 //		} STU;			<- 타입 재정의
 
-//		STU st1, st2, st3;		<- student 구조체 3개 선언
+//		STU st1, st2, st3;		<- student 구조체 3개 선언		<- OOP의 클래스 선언 및 생성자 사용과 유사한 부분이 존재함 (기원 정도로 생각)
 
-// struct, typedef, union, enum
+//	# (중요) typedef를 통한 구조체 재정의를 통한 구조체 선언은 oop의 클래스 인스턴스 선언과 유사함 (클래스에 얘가 숨겨져 있다고 보면 편함)
 
 // # typedef 선언 
 //      : typedef 자료형 재정의명칭
@@ -37,6 +35,7 @@ typedef struct student {
 
 int main() {
 
+	// (중요) 추후 클래스 선언과 유사한 구문임
 	STU st;		//  struct student st;		와 같은 인식
 
 	printf("번호를 입력하세요 :");
