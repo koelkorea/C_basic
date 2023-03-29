@@ -1,16 +1,18 @@
-// - file ¾ÈÀÇ ¹®ÀÚ¿­ ÀÔ, Ãâ·Â ÇÔ¼ö
-//		: (Áß¿ä) fopen_s¸¦ ÅëÇØ ÆÄÀÏ ½ºÆ®¸² »ý¼ºÀ» »ý¼ºÇØ ÁØ µÚ, ÇØ´ç ÆÄÀÏ ½ºÆ®¸²¿¡ »ç¿ë °¡´ÉÇÑ ÀÔ,Ãâ·Â ÇÔ¼ö  
+// - file ì•ˆì˜ ë¬¸ìžì—´ ìž…ë ¥(ì½ê¸°), ì¶œë ¥(ì“°ê¸°) í•¨ìˆ˜
+//    : fopen_së¥¼ í†µí•´ íŒŒì¼ ìŠ¤íŠ¸ë¦¼ ìƒì„±ì„ ìƒì„±í•´ ì¤€ ë’¤, í•´ë‹¹ íŒŒì¼ ìŠ¤íŠ¸ë¦¼ì— ì‚¬ìš© ê°€ëŠ¥í•œ ìž…ë ¥(ì½ê¸°), ì¶œë ¥(ì“°ê¸°) í•¨ìˆ˜  
+//      -> (ì¤‘ìš”) ëª¨ë“œ = r, ìž…ë ¥(ì½ê¸°)í•¨ìˆ˜ë§Œ ì‚¬ìš©ê°€ëŠ¥ <-> ëª¨ë“œ = w, a, ì¶œë ¥(ì“°ê¸°)í•¨ìˆ˜ë§Œ ì‚¬ìš©ê°€ëŠ¥
 
-// 3.  file¿¡ ¹®ÀÚ¿­ ÀúÀå, ¿ÜºÎ file¿¡¼­ µ¥ÀÌÅÍ °¡Á®¿À±â, ÆÄÀÏ dataÀÇ ³¡À» Ã£´Â ÇÔ¼ö
+//    3. Fileì—ì„œ ë¬¸ìžì—´ ì „ì²´ ì €ìž¥, í•´ë‹¹ Fileì—ì„œ ë°ì´í„°ë¥¼ ìˆœì°¨ì ìœ¼ë¡œ ê°€ì ¸ì˜¤ê¸°, í•´ë‹¹ íŒŒì¼ì˜ ëì„ ì°¾ëŠ” í•¨ìˆ˜
 
-//      # fprintf( fileÆ÷ÀÎÅÍ, ¹®ÀÚ¿­¡¦ );
-//          : ÆÄÀÏ¿¡ ¼­½ÄÈ­µÈ ÀÚ·á¸¦ ±â·Ï(save)ÇÏ±â À§ÇØ »ç¿ëµÇ´Â ÇÔ¼ö (ÁöÁ¤ÇÑ file Æ÷ÀÎÅÍÀÇ ÁÖ¼Ò°ª¿¡ ÇØ´çÇÏ´Â ºÎºÐ¿¡ ¹®ÀÚ¿­À» ÀúÀå)
-// 
-//              ex) int fprintf(FILE* _Stream, char const* string);
-//                      ->  int fprintf(ÆÄÀÏÆ÷ÀÎÅÍ, ¹®ÀÚ¿­¡¦);·Î ÇØ¼®
+//      # fprintf( fileí¬ì¸í„°, ë¬¸ìžì—´â€¦ );
+//        : íŒŒì¼ì— ì„œì‹í™”ëœ ìžë£Œë¥¼ ê¸°ë¡(save)í•˜ê¸° ìœ„í•´ ì‚¬ìš©ë˜ëŠ” í•¨ìˆ˜ 
+//          (ì§€ì •í•œ file í¬ì¸í„°ì˜ ì£¼ì†Œê°’ì— í•´ë‹¹í•˜ëŠ” ë¶€ë¶„ì— ë¬¸ìžì—´ì„ ì €ìž¥)
+//		 
+//          ex) int fprintf(FILE* _Stream, char const* string);
+//              -> int fprintf(íŒŒì¼í¬ì¸í„°, ë¬¸ìžì—´â€¦);ë¡œ í•´ì„
 
 
-// fprintf¸¦ ÅëÇÑ ¼ºÀûÀÔ·Â°ú ÇØ´ç ³»¿ëÀ» txt·Î ÀúÀå
+// fprintfë¥¼ í†µí•œ ì„±ì ìž…ë ¥ê³¼ í•´ë‹¹ ë‚´ìš©ì„ txtë¡œ ì €ìž¥
 #include <stdio.h>
 #include <stdlib.h>
 #define STU_SIZE 3
@@ -23,59 +25,59 @@ typedef struct student {
 
 int main() {
 
-    //ÆÄÀÏ Æ÷ÀÎÅÍ ¼±¾ð & ÃÊ±âÈ­
+    //íŒŒì¼ í¬ì¸í„° ì„ ì–¸ & ì´ˆê¸°í™”
     FILE* fp = NULL;
 
     STU sp[STU_SIZE];
 
-    // ÆÄÀÏ¸íÀ» ¹Þ±â À§ÇÑ char ¹è¿­
+    // íŒŒì¼ëª…ì„ ë°›ê¸° ìœ„í•œ char ë°°ì—´
     char file_name[80];
     int i;
 
-    printf("\n£ª ÆÄÀÏ¸í ÀÔ·Â (.txt È®ÀåÀÚ ÀÔ·Â!) : ");
+    printf("\nï¼Š íŒŒì¼ëª… ìž…ë ¥ (.txt í™•ìž¥ìž ìž…ë ¥!) : ");
 
-    // ÆÄÀÏ¸í ÀÔ·Â
-    scanf_s("%s", file_name, sizeof(file_name) - 1);        // ¹®ÀÚ¿­À» ¹Þ´Â °ÍÀÌ±â¿¡ ³¡À» ¾Ë¸®´Â NULL¹®ÀÚ(\0)ÀÌ µé¾î°¥ °ø°£ÀÎ 1¸¸Å­À» Á¦¿ÜÇØ¾ß ÇÏ¹Ç·Î, °ø°£¹èºÐÀº file_nameÀÇ Å©±âº¸´Ù 1 ÀÛ°Ô
+    // íŒŒì¼ëª… ìž…ë ¥
+    scanf_s("%s", file_name, sizeof(file_name) - 1);        // ë¬¸ìžì—´ì„ ë°›ëŠ” ê²ƒì´ê¸°ì— ëì„ ì•Œë¦¬ëŠ” NULLë¬¸ìž(\0)ì´ ë“¤ì–´ê°ˆ ê³µê°„ì¸ 1ë§Œí¼ì„ ì œì™¸í•´ì•¼ í•˜ë¯€ë¡œ, ê³µê°„ë°°ë¶„ì€ file_nameì˜ í¬ê¸°ë³´ë‹¤ 1 ìž‘ê²Œ
     while (getchar() != '\n');
 
-    // ±¸Á¶Ã¼ ÀÔ·Â(STU_SIZE ¸¸Å­ ¹Ýº¹)
+    // êµ¬ì¡°ì²´ ìž…ë ¥(STU_SIZE ë§Œí¼ ë°˜ë³µ)
     for (i = 0; i < STU_SIZE; i++) {
 
-        sp[i].no = i + 1;    //ÀÏ·Ãº¯È£
-        printf("\n¹øÈ£ : [%03d]\n", sp[i].no);
+        sp[i].no = i + 1;    //ì¼ë ¨ë³€í˜¸
+        printf("\në²ˆí˜¸ : [%03d]\n", sp[i].no);
 
-        printf("ÀÌ¸§ : ");
-        scanf_s("%s", sp[i].name, sizeof(sp[i].name) - 1);   // ¹®ÀÚ¿­À» ¹Þ´Â °ÍÀÌ±â¿¡ ³¡À» ¾Ë¸®´Â NULL¹®ÀÚ(\0)ÀÌ µé¾î°¥ °ø°£ÀÎ 1¸¸Å­À» Á¦¿ÜÇØ¾ß ÇÏ¹Ç·Î, °ø°£¹èºÐÀº file_nameÀÇ Å©±âº¸´Ù 1 ÀÛ°Ô
+        printf("ì´ë¦„ : ");
+        scanf_s("%s", sp[i].name, sizeof(sp[i].name) - 1);   // ë¬¸ìžì—´ì„ ë°›ëŠ” ê²ƒì´ê¸°ì— ëì„ ì•Œë¦¬ëŠ” NULLë¬¸ìž(\0)ì´ ë“¤ì–´ê°ˆ ê³µê°„ì¸ 1ë§Œí¼ì„ ì œì™¸í•´ì•¼ í•˜ë¯€ë¡œ, ê³µê°„ë°°ë¶„ì€ file_nameì˜ í¬ê¸°ë³´ë‹¤ 1 ìž‘ê²Œ
         while (getchar() != '\n');
 
-        printf("±¹¾î : ");
+        printf("êµ­ì–´ : ");
         scanf_s("%d", &sp[i].kor);
 
-        printf("¿µ¾î : ");
+        printf("ì˜ì–´ : ");
         scanf_s("%d", &sp[i].eng);
 
-        printf("¼öÇÐ : ");
+        printf("ìˆ˜í•™ : ");
         scanf_s("%d", &sp[i].mat);
         while (getchar() != '\n');
     }
 
-    // file_nameÀÇ ÀÌ¸§À¸·Î file »ý¼º¸ðµå : fopen_s ¼º°ø ½Ã 0 ¹ÝÈ¯
+    // file_nameì˜ ì´ë¦„ìœ¼ë¡œ file ìƒì„±ëª¨ë“œ : fopen_s ì„±ê³µ ì‹œ 0 ë°˜í™˜
     if (fopen_s(&fp, file_name, "w") == 0) {
 
 
         for (i = 0; i < STU_SIZE; i++) {
-            // fprintf(ÆÄÀÏÆ÷ÀÎÅÍ, ¹®ÀÚ¿­¡¦);
-            //  : ÆÄÀÏ¿¡ ¼­½ÄÈ­µÈ ÀÚ·á¸¦ ±â·Ï(save)ÇÏ±â À§ÇØ »ç¿ëµÇ´Â ÇÔ¼ö(ÁöÁ¤ÇÑ file Æ÷ÀÎÅÍÀÇ ÁÖ¼ÒÀ§Ä¡¿¡ ¹®ÀÚ¿­ ÀúÀå)
+            // fprintf(íŒŒì¼í¬ì¸í„°, ë¬¸ìžì—´â€¦);
+            //  : íŒŒì¼ì— ì„œì‹í™”ëœ ìžë£Œë¥¼ ê¸°ë¡(save)í•˜ê¸° ìœ„í•´ ì‚¬ìš©ë˜ëŠ” í•¨ìˆ˜(ì§€ì •í•œ file í¬ì¸í„°ì˜ ì£¼ì†Œìœ„ì¹˜ì— ë¬¸ìžì—´ ì €ìž¥)
             fprintf(fp, "%d %s %d %d %d\n", sp[i].no, sp[i].name, sp[i].kor, sp[i].eng, sp[i].mat);
         }
 
-        printf("\n\n\t\t %s ÆÄÀÏ¿¡ ÀÔ·Â¿Ï·áµÇ¾ú½À´Ï´Ù...\n", file_name);
+        printf("\n\n\t\t %s íŒŒì¼ì— ìž…ë ¥ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤...\n", file_name);
 
-        // fclose(file Æ÷ÀÎÅÍ) : ÆÄÀÏ Æ÷ÀÎÅÍ ´Ý±â
+        // fclose(file í¬ì¸í„°) : íŒŒì¼ í¬ì¸í„° ë‹«ê¸°
         fclose(fp);
 
     }else {
-        printf("File Open Fail\n"); //ÆÄÀÏ »ý¼º ½ÇÆÐ
+        printf("File Open Fail\n"); //íŒŒì¼ ìƒì„± ì‹¤íŒ¨
     }
 
     return 0;
