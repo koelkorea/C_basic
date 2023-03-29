@@ -1,70 +1,74 @@
-// - file ¾ÈÀÇ ¹®ÀÚ¿­ ÀÔ, Ãâ·Â ÇÔ¼ö
-//		: (Áß¿ä) fopen_s¸¦ ÅëÇØ ÆÄÀÏ ½ºÆ®¸² »ý¼ºÀ» »ý¼ºÇØ ÁØ µÚ, ÇØ´ç ÆÄÀÏ ½ºÆ®¸²¿¡ »ç¿ë °¡´ÉÇÑ ÀÔ,Ãâ·Â ÇÔ¼ö  
-// 
-//  1.  file³» ´ÜÀÏ¹®ÀÚ ÀÔ, Ãâ·Â ÇÔ¼ö
+// - file ì•ˆì˜ ë¬¸ìžì—´ ìž…ë ¥(ì½ê¸°), ì¶œë ¥(ì“°ê¸°) í•¨ìˆ˜
+//    : fopen_së¥¼ í†µí•´ íŒŒì¼ ìŠ¤íŠ¸ë¦¼ ìƒì„±ì„ ìƒì„±í•´ ì¤€ ë’¤, í•´ë‹¹ íŒŒì¼ ìŠ¤íŠ¸ë¦¼ì— ì‚¬ìš© ê°€ëŠ¥í•œ ìž…ë ¥(ì½ê¸°), ì¶œë ¥(ì“°ê¸°) í•¨ìˆ˜  
+//      -> (ì¤‘ìš”) ëª¨ë“œ = r, ìž…ë ¥(ì½ê¸°)í•¨ìˆ˜ë§Œ ì‚¬ìš©ê°€ëŠ¥ <-> ëª¨ë“œ = w, a, ì¶œë ¥(ì“°ê¸°)í•¨ìˆ˜ë§Œ ì‚¬ìš©ê°€ëŠ¥
 
-//      # (´ÜÀÏ ¹®ÀÚ Ãâ·Â ÇÔ¼ö) fputc(Á¤¼öº¯¼ö, ÆÄÀÏÆ÷ÀÎÅÍ)
-//          : ÆÄÀÏ·ÎºÎÅÍ ´ÜÀÏ ¹®ÀÚ¸¦ Ãâ·ÂÇÏ¿© ¹ÝÈ¯
-//            (¿¡·¯ ¹ß»ý½Ã EOF(-1) ¹ÝÈ¯)
-//              ex) int fputc(int c, FILE* stream);
+//  1. Fileì—ì„œ 'ë‹¨ì¼ë¬¸ìž' ìž…ë ¥(ì½ê¸°), ì¶œë ¥(ì“°ê¸°) í•¨ìˆ˜
 
-//      # (´ÜÀÏ ¹®ÀÚ ÀÔ·Â ÇÔ¼ö) fgetc(Á¤¼öº¯¼ö, ÆÄÀÏÆ÷ÀÎÅÍ)
-//          : ÆÄÀÏ·ÎºÎÅÍ ´ÜÀÏ ¹®ÀÚ¸¦ ÀÐ°í, ±× ¹®ÀÚ¸¦ ¹ÝÈ¯
-//            (ÆÄÀÏÀÇ ³¡À» ¸¸³ª°Å³ª, ¿¡·¯ ¹ß»ý½Ã EOF(-1) ¹ÝÈ¯)
-//              ex) int fputc(int c, FILE* stream);
+//      # (ë‹¨ì¼ë¬¸ìž ì¶œë ¥(ì“°ê¸°) í•¨ìˆ˜)
+//        fputc(ì •ìˆ˜ë³€ìˆ˜, íŒŒì¼í¬ì¸í„° (=íŒŒì¼ìŠ¤íŠ¸ë¦¼) )
+//			    : ëŒ€ìƒ Fileì— ë‹¨ì¼ ë¬¸ìžë¥¼ ì¶œë ¥(ì“°ê¸°)í•˜ì—¬ ë°˜í™˜ (= ëª¨ë“œê°€ rì—ì„œë§Œ ì‚¬ìš©ê°€ëŠ¥) 
+//			      (ì“°ê¸° ì—ëŸ¬ ë°œìƒì‹œ EOF(-1) ë°˜í™˜)
+//			        ex) int fputc(int c, FILE* stream);
+//                    -> fputc(ì •ìˆ˜ë³€ìˆ˜, íŒŒì¼ìŠ¤íŠ¸ë¦¼);ë¡œ í•´ì„
+
+//      # (ë‹¨ì¼ë¬¸ìž ìž…ë ¥(ì½ê¸°) í•¨ìˆ˜)
+//        fgetc(ì •ìˆ˜ë³€ìˆ˜, íŒŒì¼í¬ì¸í„° (=íŒŒì¼ìŠ¤íŠ¸ë¦¼) )
+//			     : ëŒ€ìƒ Fileì—ì„œ ë‹¨ì¼ ë¬¸ìžë¥¼ ìˆœì°¨ì ìœ¼ë¡œ ì½ê³ , ê·¸ ë¬¸ìžë¥¼ ë°˜í™˜ (= ëª¨ë“œê°€ w, aì—ì„œë§Œ ì‚¬ìš©ê°€ëŠ¥) 
+//			       (íŒŒì¼ì˜ ëì„ ë§Œë‚˜ê±°ë‚˜, ì½ê¸° ì—ëŸ¬ ë°œìƒì‹œ EOF(-1) ë°˜í™˜)
+//			         ex) int fputc(int c, FILE* stream);
 
 
-// ´ÜÀÏ¹®ÀÚ ÀÔ·Â(fgetc) Ãâ·Â(fputc) ÇÔ¼ö¸¦ »ç¿ë, ³»°¡ ÀÔ·ÂÇÑ ÅØ½ºÆ®µéÀ» txt ÆÄÀÏ·Î »ý¼º + ÀÐ±â
+// ë‹¨ì¼ë¬¸ìž ìž…ë ¥(fgetc) ì¶œë ¥(fputc) í•¨ìˆ˜ë¥¼ ì‚¬ìš©, ë‚´ê°€ ìž…ë ¥í•œ í…ìŠ¤íŠ¸ë“¤ì„ txt íŒŒì¼ë¡œ ìƒì„± + ì½ê¸°
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>      //_getch()
 int main() {
 
-    //file Æ÷ÀÎÅÍ ¼±¾ð & ÃÊ±âÈ­ (fileÀº ÀÌ¹Ì ¾ÖÃÊºÎÅÍ struct Çü½ÄÀÎµ¥, typedef·Î FILEÀÌ¶ó´Â ÀçÁ¤ÀÇ°¡ µÇ¾î ÀÖÀ½)
+    //file í¬ì¸í„° ì„ ì–¸ & ì´ˆê¸°í™” (fileì€ ì´ë¯¸ ì• ì´ˆë¶€í„° struct í˜•ì‹ì¸ë°, typedefë¡œ FILEì´ë¼ëŠ” ìž¬ì •ì˜ê°€ ë˜ì–´ ìžˆìŒ)
     FILE* fp = NULL;
 
     int ch;
 
-    // 1. file »ý¼º¸ðµå : fopen_s ¼º°ø ½Ã 0 ¹ÝÈ¯
-    if (fopen_s(&fp, "out.txt", "w") == 0) {            // "out.txt" ÀÌ¶ó´Â ÆÄÀÏÀ» »ý¼ºÇØ¶ó
+    // 1. file ìƒì„±ëª¨ë“œ : fopen_s ì„±ê³µ ì‹œ 0 ë°˜í™˜
+    if (fopen_s(&fp, "out.txt", "w") == 0) {            // "out.txt" ì´ë¼ëŠ” íŒŒì¼ì„ ìƒì„±í•´ë¼
 
-        printf("¹®ÀÚ ÀÔ·Â(Á¾·á:0)\n");
+        printf("ë¬¸ìž ìž…ë ¥(ì¢…ë£Œ:0)\n");
 
-        // 0À» ÀÔ·ÂÇÏ±â Á÷Àü±îÁö ´ÜÀÏ¹®ÀÚ ÀÔ·ÂÇÏ¶ó´Â do ~ while
+        // 0ì„ ìž…ë ¥í•˜ê¸° ì§ì „ê¹Œì§€ ë‹¨ì¼ë¬¸ìž ìž…ë ¥í•˜ë¼ëŠ” do ~ while
         do {
 
             ch = _getch();
 
-            printf("ÀÔ·ÂµÈ ¹®ÀÚ : %c\n", ch);
+            printf("ìž…ë ¥ëœ ë¬¸ìž : %c\n", ch);
 
-            // fputc : ½ºÆ®¸²¿¡ ¹®ÀÚ Ãâ·Â
+            // fputc : ìŠ¤íŠ¸ë¦¼ì— ë¬¸ìž ì¶œë ¥
             fputc(ch, fp);
 
         } while (ch != '0');
 
-        printf("\n \t ÇÁ·Î±×·¥ Á¾·á\n");
+        printf("\n \t í”„ë¡œê·¸ëž¨ ì¢…ë£Œ\n");
 
-        // fclose(file Æ÷ÀÎÅÍ) : ÆÄÀÏ Æ÷ÀÎÅÍ ´Ý±â
+        // fclose(file í¬ì¸í„°) : íŒŒì¼ í¬ì¸í„° ë‹«ê¸°
         fclose(fp);
 
 
     }
-    else {     // ÆÄÀÏ »ý¼º ½ÇÆÐ (fopen_sÀÇ °á°ú·Î 0À» ¹ÝÈ¯ÇÏÁö ¸øÇÒ ½Ã)
+    else {     // íŒŒì¼ ìƒì„± ì‹¤íŒ¨ (fopen_sì˜ ê²°ê³¼ë¡œ 0ì„ ë°˜í™˜í•˜ì§€ ëª»í•  ì‹œ)
 
         printf("File Open Fail\n");
 
     }
 
 
-    // 2. 1¿¡¼­ »ý¼ºÇÑ file ÀÐ±â ¸ðµå :  fopen_s ¼º°ø ½Ã 0 ¹ÝÈ¯
+    // 2. 1ì—ì„œ ìƒì„±í•œ file ì½ê¸° ëª¨ë“œ :  fopen_s ì„±ê³µ ì‹œ 0 ë°˜í™˜
     if (fopen_s(&fp, "out.txt", "r") == 0) {
 
-        printf("ÆÄÀÏ ³»¿ë\n");
+        printf("íŒŒì¼ ë‚´ìš©\n");
 
-        // ÅØ½ºÆ® ÆÄÀÏÀÇ ³¡À» ¸¸³ª¸é EOF °ªÀ» ¹Þ±â±îÁö ch¸¦ Ãâ·ÂÇÏ´Â while¹®
+        // í…ìŠ¤íŠ¸ íŒŒì¼ì˜ ëì„ ë§Œë‚˜ë©´ EOF ê°’ì„ ë°›ê¸°ê¹Œì§€ chë¥¼ ì¶œë ¥í•˜ëŠ” whileë¬¸
         while ((ch = fgetc(fp)) != EOF) {
 
-            //  \r : Ä³¸®Áö ¸®ÅÏ (ÇØ´çÇàÀÇ Ã¹Â°ÁÙ·Î ÀÌµ¿)
+            //  \r : ìºë¦¬ì§€ ë¦¬í„´ (í•´ë‹¹í–‰ì˜ ì²«ì§¸ì¤„ë¡œ ì´ë™)
             if (ch != '\r') {
                 printf("%c", ch);
             }
@@ -73,11 +77,11 @@ int main() {
             }
         }
 
-        // fclose(file Æ÷ÀÎÅÍ) : ÆÄÀÏ Æ÷ÀÎÅÍ ´Ý±â
+        // fclose(file í¬ì¸í„°) : íŒŒì¼ í¬ì¸í„° ë‹«ê¸°
         fclose(fp);
 
     }
-    else {      // ÆÄÀÏ »ý¼º ½ÇÆÐ (fopen_sÀÇ °á°ú·Î 0À» ¹ÝÈ¯ÇÏÁö ¸øÇÒ ½Ã)
+    else {      // íŒŒì¼ ìƒì„± ì‹¤íŒ¨ (fopen_sì˜ ê²°ê³¼ë¡œ 0ì„ ë°˜í™˜í•˜ì§€ ëª»í•  ì‹œ)
 
         printf("File Open Fail\n");
     }
