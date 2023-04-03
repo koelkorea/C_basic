@@ -43,6 +43,8 @@ int main() {
   int* pAry[5] = { &ary[0] , &ary[1] , &ary[2] , &ary[3] , &ary[4] };
 
   int score[5][5];
+
+  // 2차원 배열 score
   int* pScore = &score[0][0];
   int* pSarr[5] = { score[0] , score[1] , score[2] , score[3] , score[4] };
   int** ppScore = pSarr;
@@ -88,6 +90,43 @@ int main() {
     }
 
     printf("\n");
+
+
+    printf("--------------------------------------------------------------\n\n");
+
+
+    printf("[2차원 배열을 2중 포인터 변수를 역참조 하여 배열 구현] \n");
+    for (int i = 0; i < 5; i++) {
+
+        for (int j = 0; j < 5; j++) {
+            printf("%3d ", (i + 1) * ( (**ppScore) + j ) );
+        }
+        printf("\n");
+    }
+
+    printf("\n");
+
+    printf("[2차원 배열을 1중 포인터 변수를 역참조 하여 배열 구현] \n");
+    for (int i = 0; i < 5; i++) {
+
+        for (int j = 0; j < 5; j++) {
+            printf("%3d ", *pScore++);
+        }
+        printf("\n");
+    }
+
+    printf("\n");
+
+    printf("[2차원 배열을 2중 포인터 변수를 역참조 한 포인터 배열에 접근하여 배열 구현] \n");
+    for (int i = 0; i < 5; i++) {
+
+        for (int j = 0; j < 5; j++) {
+            printf("%3d ", *(pSarr[i] + j) );
+        }
+        printf("\n");
+    }
+
+
 
     return 0;
 }

@@ -37,11 +37,12 @@ int main() {
   printf(" %10s ( %-13s ): %p \n", "ppA", "= pA 林家", ppA);
   printf(" %10s ( %-13s ): %p \n\n", "&ppA", "= ppA 林家", &ppA);
 
-  printf(" %10s ( %-13s ): %d \n", "***pppA", "= a 蔼", ***pppA);
-  printf(" %10s ( %-13s ): %p \n", "**pppA", "= a 林家", **pppA);
-  printf(" %10s ( %-13s ): %p \n", "*pppA", "= pA 林家", *pppA);
-  printf(" %10s ( %-13s ): %p \n", "pppA", "= ppA 林家", pppA);
-  printf(" %10s ( %-13s ): %p \n\n", "&pppA", "= pppA 林家", &pppA);
+  // 3吝 器牢磐狼 抗矫 (捞吧肺 葛电 抗甫 促 电促)
+  printf(" %10s ( %-13s ): %d \n", "***pppA", "= a 蔼", ***pppA);			// ***pppA ( = a 蔼        ): 122
+  printf(" %10s ( %-13s ): %p \n", "**pppA", "= a 林家", **pppA);			//  **pppA ( = a 林家      ): 000000F51F6FF834
+  printf(" %10s ( %-13s ): %p \n", "*pppA", "= pA 林家", *pppA);				//   *pppA ( = pA 林家     ): 000000F51F6FF858
+  printf(" %10s ( %-13s ): %p \n", "pppA", "= ppA 林家", pppA);				//    pppA ( = ppA 林家    ): 000000F51F6FF878
+  printf(" %10s ( %-13s ): %p \n\n", "&pppA", "= pppA 林家", &pppA);			//   &pppA ( = pppA 林家   ): 000000F51F6FF898
   
   return 0;
 }
