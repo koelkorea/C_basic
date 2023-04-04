@@ -18,6 +18,18 @@
 //     -> (중요!) 그 자리에 역참조를 통한 값 입력이나 읽기를 하기 위해서는, 타자료형 포인터변수로 반드시 형변환을 해줘야 함
 //  3. 반드시 사전에 크기를 상수로 정해줘야 하는 정적할당과 다르게, 동적할당은 크기를 변수로 둘 수 있고 나중에 정해줘도 상관없음
 
+//      ex) 배열의 포인터 : (int*) malloc(sizeof(int) * n)  =  int score1[n] 에 해당하는 만큼의 메모리 공간을 할당하겠음 (이런 의미지 같다는 말은 아님.. )
+
+//          int* score1;
+//          score1 = (int*) malloc (sizeof(int) * n);       <- 시작 주소(void *)를 정수형 포인터(int *)로 형변환 후 score 대입	(sizeof(int) * n : 여기서의 *는 곱하기를 의미, 메모리의 시작주소(void *) 반환)
+//          free(score1);                                   <- score1이 가리키는 메모리 해제
+
+//      ex) 포인터 배열의 포인터 : (int**) malloc(sizeof(int*) * n)   =  int* score2[n] 에 해당하는 만큼의 메모리 공간을 할당하겠음 (이런 의미지 같다는 말은 아님.. )
+
+//          int** score2;
+//          score2 = (int**)malloc(sizeof(int*) * n);
+//          free(score2);                                   <- score2가 가리키는 메모리 해제
+
 
 // - 동적 할당 관련 함수 : 결과값은 메모리 공간이 할당된 void* '주소값'(= 형변환을 통해 타자료형 포인터변수에 대입이 가능함)
 //  1. (void*) malloc (size_t s)
@@ -39,18 +51,6 @@
  
 //  4. (void) free (void* p); 
 //		: void 포인터 변수 p가 가리키는 주소값의 메모리 영역 할당을 프리하게 해제하는 함수(메모리 누수 대비)
-
-//      ex) 배열의 포인터 : (int*) malloc(sizeof(int) * n)  =  int score1[n] 에 해당하는 만큼의 메모리 공간을 할당하겠음 (이런 의미지 같다는 말은 아님.. )
-
-//          int* score1;
-//          score1 = (int*) malloc (sizeof(int) * n);       <- 시작 주소(void *)를 정수형 포인터(int *)로 형변환 후 score 대입	(sizeof(int) * n : 여기서의 *는 곱하기를 의미, 메모리의 시작주소(void *) 반환)
-//          free(score1);                                   <- score1이 가리키는 메모리 해제
-
-//      ex) 포인터 배열의 포인터 : (int**) malloc(sizeof(int*) * n)   =  int* score2[n] 에 해당하는 만큼의 메모리 공간을 할당하겠음 (이런 의미지 같다는 말은 아님.. )
-
-//          int** score2;
-//          score2 = (int**)malloc(sizeof(int*) * n);
-//          free(score2);                                   <- score2가 가리키는 메모리 해제
 
 //N개 데이터 평균 분산 구하기
 #include <stdio.h>
