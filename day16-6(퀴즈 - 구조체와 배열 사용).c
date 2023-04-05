@@ -1,46 +1,49 @@
 #include<stdio.h>
 #include<stdlib.h>              // malloc(), free()
 #include<math.h>
-#include<stdlib.h>				// srand(), rand() ÇÔ¼ö »ç¿ë °¡´ÉÇÏ°Ô ÇÔ
+#include<stdlib.h>				// srand(), rand() í•¨ìˆ˜ ì‚¬ìš© ê°€ëŠ¥í•˜ê²Œ í•¨
 
-// 1ÇĞ³â ÇĞ»ıÀÇ ¼ºÀûµ¥ÀÌÅÍ °ü¸® ÇÁ·Î±×·¥ ÀÛ¼ºÇÏ±â
-//  -> ¹İÀÌ ÃÑ ¸î°³ÀÎÁö ÀÔ·Â¹Ş°í
-//  -> ÇØ´ç ¹İÀÇ ÇĞ»ıÀÌ ¸î¸íÀÎÁö ÀÔ·Â¹Ş°í
-//  -> ±× ¹İÀÇ °¢ ÇĞ»ıÀÇ ¼ºÀûÀ» ÀÔ·Â
+// 1í•™ë…„ í•™ìƒì˜ ì„±ì ë°ì´í„° ê´€ë¦¬ í”„ë¡œê·¸ë¨ ì‘ì„±í•˜ê¸°
+//  -> ë°˜ì´ ì´ ëª‡ê°œì¸ì§€ ì…ë ¥ë°›ê³ 
+//  -> í•´ë‹¹ ë°˜ì˜ í•™ìƒì´ ëª‡ëª…ì¸ì§€ ì…ë ¥ë°›ê³ 
+//  -> ê·¸ ë°˜ì˜ ê° í•™ìƒì˜ ì„±ì ì„ ì…ë ¥
 
-// (Ç®ÀÌ1) ±¸Á¶Ã¼¿Í ¹è¿­ »ç¿ë
+// (í’€ì´1) êµ¬ì¡°ì²´ì™€ ë°°ì—´ ì‚¬ìš©
 typedef struct class {
-    int student_num;     // ÇĞ»ıÀÇ ¼ö
-    int* student_array;  // ÇĞ»ıµé ¼ºÀû¹è¿­ÀÇ ½ÃÀÛÀ§Ä¡ ÀúÀå
+    int student_num;     // í•™ìƒì˜ ìˆ˜
+    int* student_array;  // í•™ìƒë“¤ ì„±ì ë°°ì—´ì˜ ì‹œì‘ìœ„ì¹˜ ì €ì¥
     float average;
     float varience;
 }class;
 
-void read_score(); // °ª ¾²±â
-void compute_average(); // Æò±Õ°è»ê
-void compute_varience(); // ºĞ»ê°è»ê
-void print_result(); // Ãâ·Â
-void error(char*); // ¿¹¿ÜÃ³¸®
-void release_memory(); //µ¿Àû ÇÒ´ç ÇØÁ¦
+void read_score(); // ê°’ ì“°ê¸°
+void compute_average(); // í‰ê· ê³„ì‚°
+void compute_varience(); // ë¶„ì‚°ê³„ì‚°
+void print_result(); // ì¶œë ¥
+void error(char*); // ì˜ˆì™¸ì²˜ë¦¬
+void release_memory(); //ë™ì  í• ë‹¹ í•´ì œ
 
 int main(void) {
 
     srand((unsigned int)time(NULL));
 
-    // º¯¼ö class_num : ¹İÀÇ ÃÑ °³¼ö, start_address : Á¡¼ö ÀÔ·ÂÇÒ ÁÖ¼Ò°ª ¹ŞÀ» ³à¼®
+    // ë³€ìˆ˜ class_num : ë°˜ì˜ ì´ ê°œìˆ˜, start_address : ì ìˆ˜ ì…ë ¥í•  ì£¼ì†Œê°’ ë°›ì„ ë…€ì„
     int class_num = 0;
     long long size = 0;
+
+    // êµ¬ì¡°ì²´ classì˜ ì£¼ì†Œë¥¼ ë°›ì„ class í¬ì¸í„°ë³€ìˆ˜ 
+    //  -> ì´ë¥¼ ë§¤ê°œë¡œ ì—­ì°¸ì¡°ë¥¼ í†µí•´, í•„ìš”í•œ í¬ê¸°ë§Œí¼ ê³µê°„ì„ í• ë‹¹í•˜ê³ , ë©¤ë²„ë³€ìˆ˜ì¸ class í¬ì¸íŠ¸ë³€ìˆ˜ class_start_addressì— ê·¸ ìœ„ì¹˜ë¥¼ ì „ë‹¬í•´ì£¼ê¸° ìœ„í•¨ 
     class* class_start_address = 0;
 
-    printf("ÇØ´ç ÇĞ³âÀÇ ¹İÀº ¸î °³ÀÎ°¡? : ");
+    printf("í•´ë‹¹ í•™ë…„ì˜ ë°˜ì€ ëª‡ ê°œì¸ê°€? : ");
     scanf_s("%d", &class_num);
 
-    // ÀÔ·Â¹ŞÀº ¹İÀÇ ¼ö¸¸Å­ class ±¸Á¶Ã¼ÀÇ µ¿ÀûÇÒ´ç À¯»ç¹è¿­ Á¦ÀÛ(±× ½ÃÀÛÀ§Ä¡ ÁÖ¼Ò°ªÀ» ¹Ş´Â°Ô class±¸Á¶Ã¼ Æ÷ÀÎÅÍº¯¼ö start_address)
+    // ì…ë ¥ë°›ì€ ë°˜ì˜ ìˆ˜ë§Œí¼ class êµ¬ì¡°ì²´ì˜ ë™ì í• ë‹¹ ìœ ì‚¬ë°°ì—´ ì œì‘(ê·¸ ì‹œì‘ìœ„ì¹˜ ì£¼ì†Œê°’ì„ ë°›ëŠ”ê²Œ classêµ¬ì¡°ì²´ í¬ì¸í„°ë³€ìˆ˜ start_address)
     class_start_address = (class*)calloc(class_num, sizeof(class));
     size = _msize(class_start_address);
 
-    // _msize() : Æ÷ÀÎÅÍ°¡ °¡¸®Å°´Â ¸Ş¸ğ¸® Å©±â¸¦ ¹İÈ¯ÇÏ´Â ÇÔ¼ö
-    printf("ÇÒ´çµÈ ¸Ş¸ğ¸® : %lld \n\n", size);
+    // _msize() : í¬ì¸í„°ê°€ ê°€ë¦¬í‚¤ëŠ” ë©”ëª¨ë¦¬ í¬ê¸°ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
+    printf("í• ë‹¹ëœ ë©”ëª¨ë¦¬ : %lld \n\n", size);
 
     read_score(class_start_address, class_num);
 
@@ -53,80 +56,87 @@ int main(void) {
     return 0;
 }
 
-// °ª ¾²±â
+// ê°’ ì“°ê¸°(class êµ¬ì¡°ì²´ í¬ì¸í„°ë³€ìˆ˜, ìƒì„±í•œ class ê°œìˆ˜)
 void read_score(class* class_pointer, int class_num) {
 
+    // ìƒì„±í•œ class ê°œìˆ˜ë§Œí¼ ë°˜ì˜ í•™ìƒìˆ˜ë¥¼ ë™ì ìœ¼ë¡œ ì œì‹œí•˜ê³ , ì„±ì  ìˆœì°¨ì  ì…ë ¥
     for (int i = 0; i < class_num; i++) {
 
-        float class_total = 0;
+        // ê° ë°˜ì˜ í•™ìƒìˆ˜ ì…ë ¥ -> student_numì— ì €ì¥
+        printf("\n%dë°˜ í•™ìƒìˆ˜ëŠ” ëª‡ ëª…ì¸ê°€? : ", i + 1);
+        scanf_s("%d", &((class_pointer + i) -> student_num));
 
-        // °¢ ¹İÀÇ ÇĞ»ı¼ö ÀÔ·Â -> student_num¿¡ ÀúÀå
-        printf("\n%d¹İ ÇĞ»ı¼ö´Â ¸î ¸íÀÎ°¡? : ", i + 1);
-        scanf_s("%d", &((class_pointer + i)->student_num));
+        // ì…ë ¥ë°›ì€ ë°˜ì˜ í•™ìƒìˆ˜ë“¤ì˜ ìˆ˜ë§Œí¼ int ìë£Œí˜•ì˜ ë™ì í• ë‹¹ ìœ ì‚¬ë°°ì—´ ì œì‘(ê·¸ ë°°ì—´ì˜ ì‹œì‘ìœ„ì¹˜ ì£¼ì†Œê°’ì„ ë°›ëŠ”ê²Œ int í¬ì¸í„°ë³€ìˆ˜ student_start_address)
+        (class_pointer + i) -> student_array = (class*)calloc((class_pointer + i)->student_num, sizeof(int));
 
-        // ÀÔ·Â¹ŞÀº ¹İÀÇ ÇĞ»ı¼öµéÀÇ ¼ö¸¸Å­ int ÀÚ·áÇüÀÇ µ¿ÀûÇÒ´ç À¯»ç¹è¿­ Á¦ÀÛ(±× ¹è¿­ÀÇ ½ÃÀÛÀ§Ä¡ ÁÖ¼Ò°ªÀ» ¹Ş´Â°Ô int Æ÷ÀÎÅÍº¯¼ö student_start_address)
-        (class_pointer + i)->student_array = (class*)calloc((class_pointer + i)->student_num, sizeof(int));
+        // ìƒì„±í•œ í•™ìƒì˜ ìˆ˜ë§Œí¼ ìƒì„±ëœ ë™ì  intë°°ì—´ì— ì„±ì  ìˆœì°¨ì  ì…ë ¥
+        for (int j = 0; j < (class_pointer + i) -> student_num; j++) {
 
-        for (int j = 0; j < (class_pointer + i)->student_num; j++) {
-
-            // °¢ ÇĞ»ıÀÇ ¼ºÀû ·£´ı Áö±Ş
-            *((class_pointer + i)->student_array + j) = rand() % 101;
-            printf("%d¹ø ÇĞ»ıÀÇ ¼ºÀû : %d \n", j + 1, *((class_pointer + i)->student_array + j));
+            // ê° í•™ìƒì˜ ì„±ì  ëœë¤ ì§€ê¸‰
+            *((class_pointer + i) -> student_array + j) = rand() % 101;
+            printf("%dë²ˆ í•™ìƒì˜ ì„±ì  : %d \n", j + 1, *((class_pointer + i) -> student_array + j));
         }
     }
 }
 
-// Æò±Õ°è»ê
+// í‰ê· ê³„ì‚°
 void compute_average(class* class_pointer, int class_num) {
 
+    // ìƒì„±í•œ class ê°œìˆ˜ë§Œí¼ ë°˜ì˜ í•™ìƒìˆ˜ë¥¼ ë™ì ìœ¼ë¡œ ì œì‹œí•˜ê³ , ì£¼ì–´ì§„ ì„±ì ì„ ì´ìš©í•´ ë°˜ í‰ê·  êµ¬í•˜ê¸°
     for (int i = 0; i < class_num; i++) {
 
         (class_pointer + i)->average = 0;
 
+        // ìƒì„±í•œ ë°˜ì˜ í•™ìƒì˜ ìˆ˜ë§Œí¼ ì—­ì°¸ì¡°ë¥¼ í†µí•´ ì„±ì ì„ ê°€ì ¸ì˜¤ê³  ì´ë¥¼ í†µí•´ í‰ê·  ê³„ì‚°
         for (int j = 0; j < (class_pointer + i)->student_num; j++) {
 
-            (class_pointer + i)->average +=  (*((class_pointer + i)->student_array + j) / (float) (class_pointer + i)->student_num );
+            (class_pointer + i)->average += (*((class_pointer + i)->student_array + j) / (float)(class_pointer + i)->student_num);
         }
     }
 }
 
-// ºĞ»ê°è»ê
+// ë¶„ì‚°ê³„ì‚°
 void compute_varience(class* class_pointer, int class_num) {
 
+    // ìƒì„±í•œ class ê°œìˆ˜ë§Œí¼ ë°˜ì˜ í•™ìƒìˆ˜ë¥¼ ë™ì ìœ¼ë¡œ ì œì‹œí•˜ê³ , ì£¼ì–´ì§„ ì„±ì ì„ ì´ìš©í•´ ë¶„ì‚° êµ¬í•˜ê¸°
     for (int i = 0; i < class_num; i++) {
 
-        (class_pointer + i)->varience = 0;
+        (class_pointer + i) -> varience = 0;
 
+        // ìƒì„±í•œ ë°˜ì˜ í•™ìƒì˜ ìˆ˜ë§Œí¼ ì—­ì°¸ì¡°ë¥¼ í†µí•´ ì„±ì ì„ ê°€ì ¸ì˜¤ê³  ì´ë¥¼ í†µí•´ ë¶„ì‚° ê³„ì‚°
         for (int j = 0; j < (class_pointer + i)->student_num; j++) {
 
-            (class_pointer + i)->varience
-                += (float) (((*((class_pointer + i)->student_array + j) - (class_pointer + i)->average)
-                    * (*((class_pointer + i)->student_array + j) - (class_pointer + i)->average)) / (float) (class_pointer + i)->student_num);
+            (class_pointer + i) -> varience
+                += (float)(((*((class_pointer + i)->student_array + j) - (class_pointer + i)->average)
+                    * (*((class_pointer + i)->student_array + j) - (class_pointer + i)->average)) / (float)(class_pointer + i)->student_num);
         }
     }
 }
 
-// Ãâ·Â
+// ì¶œë ¥
 void print_result(class* class_pointer, int class_num) {
 
-    printf("\n[°á°ú Ãâ·Â]\n");
-    printf("  ¹İ  ÇĞ»ı¼ö      Æò±Õ      ºĞ»ê\n");
+    printf("\n[ê²°ê³¼ ì¶œë ¥]\n");
+    printf("  ë°˜  í•™ìƒìˆ˜      í‰ê·       ë¶„ì‚°\n");
 
+    // ìƒì„±í•œ class ê°œìˆ˜ë§Œí¼ ë°˜ì˜ í•™ìƒìˆ˜ë¥¼ ë™ì ìœ¼ë¡œ ì œì‹œí•˜ê³ , ì¶œë ¥
     for (int i = 0; i < class_num; i++) {
 
-        printf("%d¹İ  %5d¸í  %6.2fÁ¡  %6.2fÁ¡ \n", i + 1, (class_pointer + i)->student_num, (class_pointer + i)->average, (class_pointer + i)->varience);
+        printf("%dë°˜  %5dëª…  %6.2fì   %6.2fì  \n", i + 1, (class_pointer + i)->student_num, (class_pointer + i)->average, (class_pointer + i)->varience);
     }
 }
 
-void error(char*); // ¿¹¿ÜÃ³¸®
+void error(char*); // ì˜ˆì™¸ì²˜ë¦¬
 
-//µ¿Àû ÇÒ´ç ÇØÁ¦
+//ë™ì  í• ë‹¹ í•´ì œ
 void release_memory(class* class_pointer, int class_num) {
 
+    // ê° êµ¬ì¡°ì²´ì˜ í•™ìƒë“¤ì˜ ìˆ˜ë§Œí¼ì˜ ì„±ì ìš¸ ì €ì¥í•˜ê¸° ìœ„í•´, ê° classì˜ nameì— ì í˜€ìˆëŠ” ì£¼ì†Œê°’ì— ë™ì ìœ¼ë¡œ í• ë‹¹(ì„ëŒ€)í–ˆë˜ ë©”ëª¨ë¦¬ë¥¼ ê°ê° í•´ì œ(ì²´í¬ì•„ì›ƒ)
     for (int i = 0; i < class_num; i++) {
 
         free((class_pointer + i)->student_array);
     }
 
+    // êµ¬ì¡°ì²´ nê°œì— í•´ë‹¹í•˜ëŠ” í¬ê¸°ì— í•´ë‹¹í•˜ëŠ” ë‚´ìš©ì„ ì €ì¥í•˜ê¸° ìœ„í•´, êµ¬ì¡°ì²´ class í¬ì¸í„°ë³€ìˆ˜ class_pointerì— ì í˜€ìˆëŠ” ì£¼ì†Œê°’ì— ë™ì  í• ë‹¹(ì„ëŒ€)í–ˆë˜ ë©”ëª¨ë¦¬ë¥¼ í•´ì œ(ì²´í¬ì•„ì›ƒ)
     free(class_pointer);
-} 
+}
