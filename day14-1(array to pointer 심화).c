@@ -21,8 +21,7 @@
 //              ex) int array_2d[5][5] = {0};
 //                  int* pointer_array1[5] = { array_3d[0] , array_3d[1] , array_3d[2] , array_3d[3] , array_3d[4] };		<- 이런식으로 표기가 가능하며
 //                  int* pin_point = array_3d[2];		<- 이런거도 성립
-
-                                             
+                                 
 //              ex)	int a[5] = { 1,2,3,4,5 };
 //                  int *p=a; 라면,
 //                  (중요) a = &a[0] 유추 가능 
