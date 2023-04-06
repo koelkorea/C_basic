@@ -59,57 +59,82 @@
 #include<stdio.h>
 int main() {
 
+  // 1차원 배열 ary
   int ary[5] = { 10 , 20 , 30 , 40 , 50 };
+  
+  // int 배열 ary의 주소값을 저장하는 int 포인터배열 pAry
   int* pAry[5] = { &ary[0] , &ary[1] , &ary[2] , &ary[3] , &ary[4] };
+  
+  // ary[i] == *pAry[i]을 보여주는 for문들
+  for (int i = 0; i < 5; i++) {
 
-  int score[5][5];
+      printf("%3d ", ary[i]);
+  }
+
+  printf("\n");
+  
+  for (int i = 0; i < 5; i++) {
+
+      printf("%3d ", *pAry[i]);
+  }
+
+  printf("\n\n");
 
   // 2차원 배열 score
+  int score[5][5];
+  
+  // 2차원 배열 score에 값을 채울 목적의 변수
+  int key = 0;
+  
+  // score배열에 값 채우기
+  for (int i = 0; i < 5; i++) {
+
+      for (int j = 0; j < 5; j++) {
+
+          score[i][j] = key + 2;
+          printf("%3d ", score[i][j]);
+      }
+      printf("\n");
+  }
+
+  // 2차원 배열 score의 시작주소를 받는 int의 포인터변수 pScore
   int* pScore = &score[0][0];
+  
+  // 2차원 배열 score의 1차원 행의 주소값들을 순차적으로 받는 int의 포인터배열 pSarr
   int* pSarr[5] = { score[0] , score[1] , score[2] , score[3] , score[4] };
+  
+  // int 포인터배열 pSarr의 시작값을 받는 int의 2중 포인터변수 ppScore
   int** ppScore = pSarr;
 
-  int key = 0;
+  printf("\n\n score[i][0] == *pSarr[i] == *(*ppScore + i)을 보여주는 for문들 \n");
 
+  // score[0][i] == *(&score[0][0] + i) == *(score[0] + i) == *(pScore + i)
+  // -> score[0][i] == *(pSarr[0] + i) == *(pSarr + i) == *((*ppScore) + i) 보여주는 for문
+  for (int i = 0; i < 5; i++) {
+      
+      printf("%3d ", score[0][i]);
+  }
+  
+  printf("\n");
+
+  for (int i = 0; i < 5; i++) {
+      printf("%3d ", *(pScore + i));
+  }
+
+  printf("\n\n score[i][0] == *pSarr[i] == *(*ppScore + i)을 보여주는 for문들 \n");
+
+  // score[i][0] == *pSarr[i] == *(&pSarr[0] + i) == *(pSarr + i) == *(*(ppScore + i))을 보여주는 for문들
+  for (int i = 0; i < 5; i++) {
+      printf("%3d ", *pSarr[i]);
+  }
+
+  printf("\n");
+  
     for (int i = 0; i < 5; i++) {
+      printf("%3d ", *(*(ppScore + i)));
+  }
 
-        printf("%3d ", ary[i]);
-    }
+  printf("\n");
 
-    printf("\n");
-    
-    for (int i = 0; i < 5; i++) {
-
-        printf("%3d ", *pAry[i]);
-    }
-
-    printf("\n\n");
-
-    for (int i = 0; i < 5; i++) {
-
-        for (int j = 0; j < 5; j++) {
-
-            score[i][j] = ++key;
-            printf("%3d ", score[i][j]);
-        }
-        printf("\n");
-    }
-
-    printf("\n");
-
-    for (int i = 0; i < 5; i++) {
-        
-        printf("%3d ", *(pScore + i));
-    }
-
-    printf("\n\n");
-
-    for (int i = 0; i < 5; i++) {
-        printf("%3d ", *pSarr[i]);
-        printf("\n");
-    }
-
-    printf("\n");
-
-    return 0;
+  return 0;
 }
