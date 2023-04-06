@@ -17,8 +17,13 @@ int main() {
     // 3차원 배열 score_3D
     int score_3D[5][5][5] = { 0 };
 
+    // pScore1 = score_3D = &score_3D[0][0][0]
     int* pScore1 = score_3D;
+    
+    // pScore2 = score_3D[2] = &score_3D[2][0][0]
     int* pScore2 = score_3D[2];
+    
+    // pScore3 = score_3D[3][4] = &score_3D[3][4][0]
     int* pScore3 = score_3D[3][4];
 
     int key = 0;
