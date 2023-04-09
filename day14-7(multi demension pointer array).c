@@ -32,7 +32,7 @@
 
 
 //      # 잘못된 예시
-//			ex1) int score[5][5];
+//          ex1) int score[5][5];
 //               int* pScore[5] = score;   <- 컴파일 오류 유발
 
 //      # 좋은 예시
