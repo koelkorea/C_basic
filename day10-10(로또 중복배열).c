@@ -1,22 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>				//	srand(), rand() 함수 사용 가능하게 함
 
-// 로또 번호 6개를 n개 생성하는 기능 함수를 써서 구현
-//		-> 생성할 개수 저장
-//		-> 1번째 로또 번호 6개 생성 + 중복검사
-//		-> 생성된 녀석을 정렬 (순차, 선택)
-//		-> 번호 출력
+// 로또 번호 6개를 n개 생성하는 기능 함수를 써서 구현 (중복체크를 for문을 통한 비교)
+//  -> 생성할 개수 저장
+//  -> 1번째 로또 번호 6개 생성 + 중복검사
+//  -> 생성된 녀석을 정렬 (순차, 선택)
+//  -> 번호 출력
 
-// (전체)로또 buy_num개만큼 발권 (lotto_generate, lotto_sort 가 내부에 포함 후 반복)
+// lotto_repeat()
+//  : (전체) 로또 buy_num개만큼 lotto_one_cycle 반복 발권 (lotto_generate, lotto_sort 가 내부에 포함 후 반복)
 void lotto_repeat(int buy_num);
 
-// (1인분) 로또 뽑는 로직(lotto_generate, lotto_duplication_check, lotto_sort 포함)
+// lotto_one_cycle()
+//  : (1인분) 로또 뽑는 로직(lotto_generate, lotto_duplication_check, lotto_sort 포함)
 void lotto_one_cycle(void);
 
-//	(최하위 로직 3개)
-int lotto_generate(void);				// 1) 개별 로또 번호 발급
-int lotto_duplication_check(int check_num, int duplication_check[46]);		// 2) 1싸이클 뽑는 중 중복체크
-void lotto_sort(int array[6]);		// 3) 뽑은거 정렬
+//-----------------------------(lotto_one_cycle 포함 로직 3개)--------------------------------------
+
+// 1) lotto_generate()
+//     : 개별 로또 번호 발급
+int lotto_generate(void);
+
+// 2) lotto_duplication_check(int, int)
+//     : 1싸이클 뽑는 중 중복체크
+int lotto_duplication_check(int check_num, int duplication_check[46]);
+
+// 3) lotto_sort(int 배열[6])
+//     : 뽑은 로또 숫자 정렬
+void lotto_sort(int array[6]);
 
 int main() {
 	srand((unsigned int)time(NULL));
@@ -87,14 +98,17 @@ void lotto_one_cycle(void) {
 		int duplication_status = 1;
 
 		do {
-			lotto_array[i] = lotto_generate();		// 1. 개별 뽑기
-			duplication_status = lotto_duplication_check(lotto_array[i], duplication_check);		// 2. 뽑은 녀석 중복여부 체크 (0이면 중복임)
+			// 1. 개별 뽑기
+			lotto_array[i] = lotto_generate();		
+
+			// 2. 뽑은 녀석 중복여부 체크 (0이면 중복임)
+			duplication_status = lotto_duplication_check(lotto_array[i], duplication_check);		
 
 		} while (duplication_status == 0);
 
 	}
-
-	lotto_sort(lotto_array);		// 3. 뽑은거 정렬
+	// 3. 뽑은거 정렬
+	lotto_sort(lotto_array);		
 
 	// 1, 2, 3 과정 완료 후.. 해당 회차 로또 뽑은 내역 출력 
 	for (int i = 0; i < sizeof(lotto_array) / sizeof(lotto_array[0]) ; i++) {

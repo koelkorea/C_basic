@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include <stdlib.h>				//	srand(), rand() 함수 사용 가능하게 함
-#include <time.h>				// time () 함수 사용 가능하게 함
-#include <windows.h>		// sleep() 함수 사용 가능하게 함
+#include <stdlib.h>       // srand(), rand() 함수 사용 가능하게 함
+#include <time.h>         // time () 함수 사용 가능하게 함
+#include <windows.h>      // sleep() 함수 사용 가능하게 함
 
 // (특이점 1) 별칭과 값을 매칭시켜, 프로그래머가 코드는 별칭으로 입력해도.. 컴퓨터는 찰떡같이 그걸 숫자로 알아들음
 #define 가위 1 
@@ -14,9 +14,11 @@
 // (모범답안) random 함수를 이용하여 컴퓨터와 하는 가위, 바위, 보를 만들어라
 int main() {
 
-	// srand(unsigned int seed) : rand()의 패턴의 근원인 seed변환
+	// srand(unsigned int seed)
+	//  : rand()의 패턴의 근원인 seed변환
 	//		-> 이것의 파라미터로 time(NULL)을 받아, 현재 시간에 따라 rand()의 실행 패턴이 되는 seed값에 변주를 줄 수 있음
 	srand((unsigned int)time(NULL));			//  이를 주석화 시키면, 패턴이 똑같은 값만 출력되는걸 볼 수 있음
+
 
 	// (특이점2) 승리자를 저장하는 victory 변수 사용..
 	int player, com, victory;			

@@ -14,6 +14,7 @@ int main() {
 		if (code >= 97 && code <= 122) {
 
 			code -= 32;
+
 			printf("\n소문자 -> 대문자로 변환 ");
 			printf("\n당신이 입력한 소문자 -> 대문자 결과 : %c \n\n", code);
 		}

@@ -1,12 +1,12 @@
 #include <stdio.h>
 
 // 이번에 만들었던 공학계산기 코드를 사용자 함수를 이용해서 만들기
-int display_menu(void);		// 메뉴
-int inch_cm(void);				// 1.
-int cm_inch(void);				// 2.
-int f_c(void);							// 3.
-int c_f(void);							// 4.
-void world_end();					// 5.
+int display_menu(void);     // 메뉴
+int inch_cm(void);          // 1.
+int cm_inch(void);          // 2.
+int f_c(void);              // 3.
+int c_f(void);              // 4.
+void world_end();           // 5.
 void nothing();
 
 int main() {

@@ -10,7 +10,8 @@ int main() {
 	// 배열 초기화 되는 예시
 	int array[6][6], rowSum, columnSum;
 
-	for (int i = 0; i < sizeof(array) / sizeof(array[0]) - 1; i++) {		//	sizeof(변수명)은 말 그대로 해당 변수명 인스턴스에 주어진 메모리 크기를 출력하는거라 다차원배열을 넣어도 됨(그저 그 배열 전체의 메모리 크기를 출력)
+	//	sizeof(변수명)은 말 그대로 해당 변수명 인스턴스에 주어진 메모리 크기를 출력하는거라 다차원배열을 넣어도 됨(그저 그 배열 전체의 메모리 크기를 출력)
+	for (int i = 0; i < sizeof(array) / sizeof(array[0]) - 1; i++) {		
 
 		rowSum = 0;
 

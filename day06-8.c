@@ -11,7 +11,7 @@ int main() {
 	while (flag != 81 && flag != 113) {			// ASCII코드로 Q: 113, q : 81
 
 		printf("제곱근을 구할 숫자를 써라 :  ");
-		scanf_s("%lf", &number);			// double도 실수로 출력문자는 f지만, 일종의 long 자료형으로서 lf로 쓴다 (scanf에서 double로 값을 받으려면 %lf 필수다!)
+		scanf_s("%lf", &number);                // double도 실수로 출력문자는 f지만, 일종의 long 자료형으로서 lf로 쓴다 (scanf에서 double로 값을 받으려면 %lf 필수다!)
 		while (getchar() != '\n');
 
 		result = sqrt(number);
