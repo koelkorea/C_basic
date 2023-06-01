@@ -12,6 +12,7 @@ int main(void) {
 
     // 변수 a, b 받을 녀석
     int a = 0, b = 0;
+
     // 부호 받을 c, 식을 받을 input배열
     char c = 0, buf[1025] = { 0 };
 
@@ -19,7 +20,6 @@ int main(void) {
 
     // gets_s : 입력된 문자열 1줄을 지정하는 char 배열에 넣어줌, 반드시 파라미터로 메모리 크기를 할당해줘야 함
     gets_s(buf, sizeof(buf) - 1);
-
 
     // 반복문을 돌리되, buf[k]가 처음으로 0~9까지 이외의 값이 나온 시기를 기점으로 값이 변한거까지 3개 조건으로 설정
     for (int k = 0; k < strlen(buf); k++) {
@@ -40,13 +40,17 @@ int main(void) {
         else break;
     }
 
-    int (*pF)(int, int) = NULL;//(반환형) (* 포인터 변수 이름) (매개변수1, 매개변수2, …)
+    // 함수 포인터 선언법 ( asterisk(*) 연산자 사용)
+    //  : 자료형 (* 함수포인터변수명) (매개변수1, 매개변수2, …)
+    int (*pF)(int, int) = NULL;
 
     switch (c) {
+
         case '+': pF = add; break; // add 함수 이름 == 메모리 시작 주소
         case '-': pF = sub; break;
         case '*': pF = mul; break;
         case '/': pF = div; break;
+
         default: printf("Error\n"); exit(0);
     }
 
