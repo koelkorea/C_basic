@@ -45,7 +45,7 @@ void read_score() {
     //float var[no_class];  분반 별 분산 값 배열
     var = (float*)malloc(no_class * sizeof(float));
     
-    //int * score[no_class]; 분반 별 성적을 가리키는 포인터 배열
+    //int* score[no_class]; 분반 별 성적을 가리키는 포인터 배열
     score = (int**)malloc(no_class * sizeof(int*));
     
     if (no_student == NULL || ave == NULL || var == NULL || score == NULL)

@@ -1,19 +1,19 @@
 // (중요) C언어에서의 parameter와 정적array
-//   : 함수의 파라미터 정적array의 모든 값을 넣고 싶다면?
-//      -> int p[10] 사용 X          <-  C언어는 매개변수로 배열의 선언을 허용X  = 배열을 통째로 복사하는 방법X
- //     -> int p[] 사용 ㅇ             <- 그 대신 배열의 주소 값으로 전달 (아시다시피 이 녀석은 배열이 아니라 크기까지 가져오진 않는다는거 명심)
+//   : 어떤 함수의 parameter로 정적 array의 모든 값을 넣고 싶다면?
+//      -> int p[10] 사용 X                                           <- C언어는 매개변수로 배열의 선언을 허용X  =  배열을 통째로 복사하는 방법X
+//      -> int p[] 사용 ㅇ                                            <- 배열의 시작주소값을 전달하여, 배열의 값을 역참조 하여 함수에 활용할 수 있게 하면 됨!
+//                                                                        -> BUT! 아시다시피 이 녀석은 배열이 아니라 크기까지 가져오진 않는다는거 명심
 
 
+// 함수의 파라미터로 배열주소를 배열 방식 표현 예시 (int p[] , int *p 중 int p[] 선택)
 #include <stdio.h>
 #include <stdlib.h> // rand() , srand()
 #include <time.h> // time()
 #define MAX 10
 #define rand_range 5000
 
-//함수의 파라미터로 배열주소를 배열 방식 표현 예시 (int p[] , int *p 중 int p[] 선택)
-
 // 배열에 랜덤값 넣는 과정
-void input(int p[], int cnt) {      // int p[]는 배열의 모양을 하고 있지만, 실제로는 &p[0]의 값을 가지고 있고, 배열 크기는 소실되어 있음
+void input(int p[], int cnt) {      // parameter int p[]는 배열의 모양을 하고 있지만, 실제로는 &p[0]의 값을 가지고 있고, 배열 크기는 소실되어 있음
 
     srand(time(NULL));
 
@@ -24,7 +24,10 @@ void input(int p[], int cnt) {      // int p[]는 배열의 모양을 하고 있
     for (int i = 0; i < cnt; i++) {
 
         printf("생성 %3d : ", i + 1);
-        p[i] = rand() % rand_range + 1;         // p[i] = *(p+i)
+
+        // p[i] = *(p + i)
+        p[i] = rand() % rand_range + 1;
+
         printf(" %4d\n", p[i]);
     }
 }

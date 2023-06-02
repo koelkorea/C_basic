@@ -37,7 +37,8 @@ int main(void) {
         printf("\n%d반 학생수는 몇 명인가? : ", i + 1);
         scanf_s("%d", &student_num);
 
-        // 입력받은 반의 학생수들의 수만큼 int 자료형의 동적할당 유사배열 제작(그 배열의 시작위치 주소값은 int 2중 포인터변수 class_start_address가 저장한 메모리 위치에 순차적으로 저장되어 있음)
+        // 입력받은 반의 학생수들의 수만큼 int 자료형의 동적할당 유사배열 제작
+        // (그 배열의 시작위치 주소값은 int 2중 포인터변수 class_start_address가 저장한 메모리 위치에 순차적으로 저장되어 있음)
         *(class_start_address + i) = (int*)calloc(student_num, sizeof(int));
 
         for (int j = 0; j < student_num; j++) {

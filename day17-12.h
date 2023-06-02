@@ -4,12 +4,12 @@
 #define Max 10
 typedef struct _book
 {
-    int no;// 책 일련번호
-    char title[30]; //도서명
-    char author[20]; //작가
-    int price; //가격
-    int cnt; //수량
-    int sale; //매출액(가격 * 수량)
+    int no;          // 책 일련번호
+    char title[30];  // 도서명
+    char author[20]; // 작가
+    int price;       // 가격
+    int cnt;         // 수량
+    int sale;        // 매출액(가격 * 수량)
 }BOOK;
 
 enum input { Input = 1, Output, Sort, Search, Exit };
@@ -79,8 +79,8 @@ int str_cmp(char* str1, char* str2) {
 // str_len(문자열 주소) : 해당 문자열의 길이 반환
 int str_len(char* p) {
 
-    int n = 0;                       // 현재 문자열 길이을 나타냄
-    while (*p++)n++;        // 현재 참고하는 문자열 주소 위치의 값을 역참조한 값이 null이 아니면? 숫자를 1개씩 올린다.    -> 이걸 문자열이 null이 나와 끝날때까지 계속하면, 문자열 길이 체크 가능
+    int n = 0;           // 현재 문자열 길이을 나타냄
+    while (*p++)n++;     // 현재 참고하는 문자열 주소 위치의 값을 역참조한 값이 null이 아니면? 숫자를 1개씩 올린다.    -> 이걸 문자열이 null이 나와 끝날때까지 계속하면, 문자열 길이 체크 가능
     return n;
 }
 

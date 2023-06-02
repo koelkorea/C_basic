@@ -1,20 +1,22 @@
 //  - (중요 !!!) c언어에서의 문자열은 그 자체가 char 배열 !!!! 
 
-//   # (주의!) char[] 형식의 문자열(string)은 반드시 그 끝을 알리는 NULL문자(\0)까지 포함해줘야 출력시 정상적으로 인식함
+//   # (주의!) char[] 형식의 문자열(string)은 반드시 그 끝을 알리는 NULL문자(\0)까지 포함해줘야 출력시 정상적으로 인식함 (= char[] 문자열의 배열 길이 = 문자열 길이 + 1)
 
 //   # 문자열이 char 배열에 따른 특성들
-//      1. char c[] = { C, l,a,n,g,u,a,g,e,!,\0, s,e,c,re,t, s,p,a,c,e } 로 쓰지 않아도 됨 ->  char c[] = "C language!\0 secret space"; 로 OK           <-  \0은 NULL을 의미하는 문자로 문자열 이스케이프 문자
 
-//      2. (제일 중요) 문자열은 배열이라  char c[] = "C language!\0 secret space"; 가 성립
-//            -> char * p = c가 성립
-//            -> char * p = "C language!\0 secret space" 라고 써도 성립한다는 충격과 공포가 성립
+//     1. char c[] = { C, l,a,n,g,u,a,g,e,!,\0, s,e,c,re,t, s,p,a,c,e } 로 쓰지 않아도 됨
+//         ->  char c[] = "C language!\0 secret space"; 로 OK                                 <- \0은 NULL을 의미하는 문자로 문자열 이스케이프 문자
 
-//      3. 2번의 문자열의 배열로서의 성질과 pointer array를 결함하면 다음도 성립 
-//            ->	char* q[3] = { "Computer","Programing","Enjoy" }            <- 문자열은 배열이기에 저렇게 적어도 주소를 적은거로 성립이 가능하다
+//     2. (제일 중요) 문자열은 배열이라  char c[] = "C language!\0 secret space"; 가 성립
+//          -> char* p = c가 성립
+//          -> char* p = "C language!\0 secret space" 라고 써도 성립한다는 충격과 공포가 성립
 
-//                  - q[0] =  "Computer\0"          <- 포인터 변수도 배열형식대로 쓰면, *없이도 역참조 모드임 
-//                  - q[1] =  "Programing\0"
-//                  - q[2] =  "Enjoy\0"
+//     3. 2번의 문자열의 배열로서의 성질과 pointer array를 결함하면 다음도 성립 
+//          -> char* q[3] = { "Computer","Programing","Enjoy" }                               <- 문자열은 배열이기에 저렇게 적어도 주소를 적은거로 성립이 가능하다
+
+//                   q[0] =  "Computer\0"                                                     <- 포인터 변수도 배열형식대로 쓰면, *없이도 역참조 모드임 
+//                   q[1] =  "Programing\0"
+//                   q[2] =  "Enjoy\0"
 
 //      (정리)
 //      -------------------------------------------------------------------------------------------
@@ -74,7 +76,7 @@ int main()
 
     // "Computer", "Programing", "Enjoy" 출력
     for (int i = 0; i < 3; i++) {
-        printf("%s\n", *(q + i) );          // 
+        printf("%s\n", *(q + i) );
     }
 
     printf("\n\n");

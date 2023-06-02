@@ -5,7 +5,7 @@
 int main() {
 
     BOOK books[Max] = {
-        {1, "asdasd", "adsads", 12, 12 , 12*12},
+        {1, "asdasd", "adsads", 12, 12 , 12 * 12},
         {2, "dsadsa", "sdfsdf", 12, 12 , 12 * 12},
         {3, "dfgdfg", "gfdgfd", 12, 12 , 12 * 12},
     };

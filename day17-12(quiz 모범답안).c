@@ -6,16 +6,16 @@
 
 
 // 도서 시스템 (모범답안)
-//		- strcmp() 함수를 그냥 가져다 씀 
-//		    -> 단, 이걸로 검색과 정렬을 둘 다 써서 경제적인 효과 노력
+//  - strcmp() 함수를 그냥 가져다 씀 
+//     -> 단, 이걸로 검색과 정렬을 둘 다 써서 경제적인 효과 노력
 typedef struct _book
 {
-    int no;                       // 책 일련번호
-    char title[30];          // 도서명
+    int no;              // 책 일련번호
+    char title[30];      // 도서명
     char author[20];     // 작가
-    int price;                   // 가격
-    int cnt;                      // 수량
-    int sale;                    // 매출액(가격 * 수량)
+    int price;           // 가격
+    int cnt;             // 수량
+    int sale;            // 매출액(가격 * 수량)
 }BOOK;
 
 void input(BOOK* p);  //입력함수

@@ -1,13 +1,16 @@
-// - 동적 할당 관련 함수
-//  3. (void*) calloc (size_t _Count, size_t _size) 
-//      : _count 개수 * _size 메모리 크기 를 저장할 수 있는 메모리 공간을 할당 (성공 : 메모리 시작주소 반환 , 실패 : NULL 반환)
+//  - 동적 할당 관련 함수
+//     : 결과값은 메모리 공간이 할당된 void* '주소값'
+//       (= 형변환을 통해 타자료형 포인터변수에 대입이 가능함)
 
-//      # (중요) malloc과의 차이점
-//        1. 할당된 메모리 값 모두 0으로 초기화
-//        2. 개수를 파라미터로 놔서, 직관성을 늘림
+//       3. (void*) calloc (size크기자료형, size_t 메모리byte수) 
+//           : _count 개수 * _size 메모리 크기 를 저장할 수 있는 메모리 공간을 할당 (성공 : 메모리 시작주소 반환 , 실패 : NULL 반환)
 
-//  4. (void*) realloc (void* _Block, size_t size)
-//      : 이미 할당한 포인터 변수의 주소값을 _block하고, 재할당 할 공간의 크기를 size에 입력 (성공 : 메모리 시작주소 반환 , 실패 : NULL 반환)
+//            # (중요) malloc과의 차이점
+//              1. 할당된 메모리 값 모두 0으로 초기화
+//              2. 개수를 파라미터로 놔서, 직관성을 늘림
+
+//       4. (void) free (void* p); 
+//           : void 포인터 변수 p가 가리키는 주소값의 메모리 영역 할당을 프리하게 해제하는 함수(메모리 누수 대비)
 
 #include<stdio.h>
 #include<stdlib.h>              // malloc(), free()
@@ -33,7 +36,8 @@ int main(void) {
     
     // (void*) calloc (size_t _Count, size_t _size) 
     //  : _count 개수 * _size 메모리 크기 를 저장할 수 있는 메모리 공간을 할당 (성공 : 메모리 시작주소 반환 , 실패 : NULL 반환)
-    start_address =  (int*) calloc(n, sizeof(int));  // int 포인터변수에 해당하는 만큼의 메모리를 n개 연속으로 동적 할당한 후, 그 시작 주소값을 int 포인터변수 start_address 반환 + 메모리값들 모두를 0으로 초기화
+    //     -> int 포인터변수에 해당하는 만큼의 메모리를 n개 연속으로 동적 할당한 후, 그 시작 주소값을 int 포인터변수 start_address 반환 + 메모리값들 모두를 0으로 초기화
+    start_address =  (int*) calloc(n, sizeof(int));  
 
     size = _msize(start_address);
 
